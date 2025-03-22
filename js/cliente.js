@@ -3,7 +3,8 @@ var empresa;
 (function (empresa) {
     class Cliente extends empresa.Pessoa {
         constructor(codigo) {
-            super();
+            super(); //pega todos os construtores de 'Pessoa' ou da classe chamada.
+            this._saldo = 0;
             this._codigo = codigo;
         }
         get codigo() {
@@ -12,8 +13,19 @@ var empresa;
         get saldo() {
             return this._saldo;
         }
-        set saldo(saldo) {
-            this._saldo = saldo;
+        deposita(valor) {
+            // this._saldo = this._saldo + valor;
+            this._saldo += valor;
+        }
+        comprar(valorCompra) {
+            if (this._saldo >= valorCompra) {
+                this._saldo = this._saldo - valorCompra;
+                // this._saldo -= valorCompra; mesma coisa da linha de cima
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
     empresa.Cliente = Cliente;
